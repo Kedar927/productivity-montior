@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Monitoring App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Workspace Monitoring Application</h1>
+    </header>
+    <main>
+        <section id="video-feed">
+            <h2>Real-Time Video Feed</h2>
+            <video id="video" autoplay></video>
+        </section>
+        <section id="log-entry">
+            <h2>Log Entry</h2>
+            <form id="entry-form">
+                <label for="entry-time">Entry Time:</label>
+                <input type="time" id="entry-time" name="entry-time" required>
+                <button type="submit">Log Entry</button>
+            </form>
+        </section>
+        <section id="logs">
+            <h2>Activity Logs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Activity</th>
+                    </tr>
+                </thead>
+                <tbody id="log-entries">
+                    <!-- Log entries will be populated here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Workspace Monitoring App</p>
+    </footer>
+    <script>
+        // JavaScript to handle video feed and form submission
+        const video = document.getElementById('video');
+        const entryForm = document.getElementById('entry-form');
+        const logEntries = document.getElementById('log-entries');
+
+        // Function to start video feed
+        function startVideo() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                })
+                .catch(err => {
+                    console.error("Error accessing the camera: ", err);
+                });
+        }
+
+        // Handle form submission
+        entryForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const entryTime = document.getElementById('entry-time').value;
+            // Logic to log entry time to backend
+            // Update logEntries with new entry
+        });
+
+        // Start video feed on page load
+        window.onload = startVideo;
+    </script>
+</body>
+</html>
